@@ -1,0 +1,75 @@
+[
+{
+   "metadata": {
+   	"id": 1,
+    	"name": "rule 1",
+        "author": "Rahil Poladiya",
+        "created_at": "13-04-2024"
+    },
+    "condition": {
+        "and": [
+            {"Protocol": "TCP"},
+            {"or": [
+                {"Destination Port": 443},
+                {"Source Port": 443}
+            ]}
+        ]
+    },
+    "action": {S
+        "type": "alert",
+        "message":"TCP HTTPS attack!"
+    }
+},
+{
+        "metadata": {
+            "id": 2,
+            "name": "rule 2",
+            "author": "Rahil Poladiya",
+            "created_at": "16-06-2024",
+            "expiry": "15 mins"
+        },
+        "condition": {
+            "and": [
+                {"Protocol": "TCP"},
+                {"Source Port": {"$gt": 10024}}
+            ]
+        },
+        "action": {
+            "type": "alert",
+            "message": "TCP Source Port is greater than 1024!"
+        }
+    },
+{
+    "metadata": {
+        "id": 3,
+        "name": "rule 3",
+        "author": "Rahil Poladiya",
+        "created_at": "18-06-2024"
+    },
+    "condition": {
+        "and": [
+            {"Protocol": "TCP"},
+            {"Source Port": {"$bw": [1025, 1035]}}
+        ]
+    },
+    "action": {
+        "type": "alert",
+        "message": "TCP port between 1025 and 1035"
+    }
+},
+{
+    "metadata": {
+        "id": 4,
+        "name": "rule 4",
+        "author": "Rahil Poladiya",
+        "created_at": "18-06-2024"
+    },
+    "condition": {
+            "Protocol":{"$inprev":{"Protocol":"ICMP"}}
+    },
+    "action": {
+        "type": "alert",
+        "message": "ICMP In Previous Packet!"
+    }
+}
+]
